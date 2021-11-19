@@ -4,7 +4,8 @@
   "description": "vue3后台系统",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon src/index.js"
   },
   "keywords": [
     "node"
@@ -12,6 +13,7 @@
   "author": "coderwei",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "koa": "^2.13.4",
     "koa-body": "^4.2.0",
     "koa-router": "^10.1.1",
