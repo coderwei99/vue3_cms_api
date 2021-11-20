@@ -12,12 +12,13 @@ const seq = new Sequelize(MYSQL_HOST_DB, MYSQL_USER, MYSQL_HOST_PASSWORD, {
   dialect: "mysql",
 });
 
+module.exports = seq;
 // 测试连接数据库
-seq
-  .authenticate()
-  .then(() => {
-    console.log("数据库连接成功");
-  })
-  .catch(err => {
-    console.log("数据库连接失败", err);
-  });
+// seq
+//   .authenticate()
+//   .then(() => {
+//     console.log("数据库连接成功");
+//   })
+//   .catch(err => {
+//     console.log("数据库连接失败", err);
+//   });
