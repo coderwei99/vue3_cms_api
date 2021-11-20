@@ -1,6 +1,6 @@
 // 导入serve的函数
 const { createUser } = require("../server/user.server");
-const { regjsterError } = require("../config/errorType");
+const { createUserError } = require("../config/errorType");
 
 class UserController {
   // 注册用户
@@ -16,8 +16,7 @@ class UserController {
         departmentId,
         roleId,
       });
-      console.log("bahahah", res);
-      const { id, updatedAt, createdAt, ...result } = res;
+      const { id, updatedAt, password: npassword, createdAt, ...result } = res;
 
       ctx.body = {
         code: 0,
@@ -25,10 +24,24 @@ class UserController {
         result,
       };
     } catch (error) {
-      // console.error(error);
-      console.log(error);
-      ctx.app.emit("error", regjsterError, ctx);
+      console.error(error);
+      // console.log(ctx);
+      createUserError.result = error;
+      ctx.app.emit("error", createUserError, ctx);
     }
+  }
+
+  // 用户登录
+  async login(ctx) {
+    const { name, password } = ctx.request.body;
+    // console.log(name, password);
+    ctx.body = {
+      code: 0,
+      message: "登录成功",
+      result: {
+        name,
+      },
+    };
   }
 }
 

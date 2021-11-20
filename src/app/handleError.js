@@ -11,6 +11,6 @@ module.exports = (err, ctx) => {
       status = 500;
   }
   ctx.status = status;
-  console.log(err);
+  console.log(err, "app/handleError.js");
   ctx.body = err;
 };

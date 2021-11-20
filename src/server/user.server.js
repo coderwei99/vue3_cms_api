@@ -9,26 +9,30 @@ class UserServer {
     departmentId,
     roleId,
   }) {
-    // console.log({ name, realname, password, cellphone, departmentId, roleId });
-    const res = await User.create({
-      name,
-      realname,
-      password,
-      cellphone,
-      departmentId,
-      roleId,
-    });
-    // const { id, updateAt, createAt, ...result } = res;
-    return res.dataValues;
+    try {
+      // console.log({ name, realname, password, cellphone, departmentId, roleId });
+      const res = await User.create({
+        name,
+        realname,
+        password,
+        cellphone,
+        departmentId,
+        roleId,
+      });
+      // const { id, updateAt, createAt, ...result } = res;
+      return res.dataValues;
+    } catch (error) {
+      console.error(error, "roo");
+    }
   }
 
-  async verifyUserName(ctx, next) {
-    const res = await User.findAll({
+  // 查找用户
+  async verifyUserName(name) {
+    const res = await User.findOne({
       where: {
-        name: ctx.request.body.name,
+        name,
       },
     });
-    console.log(res);
     return res;
   }
 }
