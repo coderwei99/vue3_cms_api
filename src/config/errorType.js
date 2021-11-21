@@ -55,6 +55,13 @@ module.exports = {
     data: null,
   },
 
+  // 部门模块
+  departmentParamsError: {
+    code: "10201",
+    message: "请检查参数",
+    data: null,
+  },
+
   // 后端错误
   createUserError: {
     code: "20001",
