@@ -43,6 +43,11 @@ module.exports = {
     message: "删除用户失败",
     data: null,
   },
+  updateUserInfoError: {
+    code: "10009",
+    message: "不能在这个接口修改用户密码",
+    data: null,
+  },
 
   isRoleError: {
     code: "10101",

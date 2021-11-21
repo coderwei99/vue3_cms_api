@@ -58,6 +58,25 @@ class UserServer {
     });
     return res !== 0 ? true : false;
   }
+
+  // 查询用户列表
+  async getUsersList({ pageNum, pageSize }) {
+    // console.log("server", { pageNum, pageSize });
+    const offset = (pageNum - 1) * pageSize;
+    console.log(offset, "offset");
+    console.log(pageSize, "pageSize");
+    const { rows, count } = await User.findAndCountAll({
+      offset,
+      limit: pageSize * 1,
+    });
+    console.log(rows);
+    return {
+      pageSize,
+      pageNum,
+      list: rows,
+      count,
+    };
+  }
 }
 
 module.exports = new UserServer();

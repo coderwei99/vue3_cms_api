@@ -7,14 +7,18 @@ const {
   verifyUserName,
   updateByid,
   delteUserByid,
+  getUsersList,
 } = require("../server/user.server");
+
 // 导入错误类型
 const {
   createUserError,
   deleteUserError,
   updatePasswordError,
   EnddeleteUserError,
+  updateUserInfoError,
 } = require("../config/errorType");
+
 // 导入tkoen秘钥
 const { JWT_SECRET } = require("../config/config.default");
 class UserController {
@@ -82,6 +86,8 @@ class UserController {
     const changeParams = ctx.request.body;
     // const id = ctx
     // console.log(ctx.request.params);
+    if (changeParams.password)
+      return ctx.app.emit("error", updateUserInfoError, ctx);
     const res = await updateByid({ ...changeParams, ...ctx.request.params });
     ctx.body = {
       code: 0,
@@ -105,6 +111,21 @@ class UserController {
     } catch (error) {
       console.error("error", error);
       return ctx.app.emit("error", EnddeleteUserError, ctx);
+    }
+  }
+
+  // 获取用户列表
+  async getUserList(ctx) {
+    const { pageSize = 10, pageNum = 1 } = ctx.request.query;
+    try {
+      const res = await getUsersList({ pageNum, pageSize });
+      ctx.body = {
+        code: 0,
+        message: "获取用户列表成功",
+        data: res,
+      };
+    } catch (err) {
+      console.log("getUserList函数", err);
     }
   }
 }
