@@ -8,6 +8,7 @@ const {
   login,
   changePassword,
   deleteUser,
+  changeUserInfo,
 } = require("../controller/user.controller");
 
 // 导入中间件
@@ -31,4 +32,5 @@ router.patch("/", auth, cryptPassword, changePassword);
 
 // 删除用户
 router.delete("/", auth, deleteUser);
+
 module.exports = router;

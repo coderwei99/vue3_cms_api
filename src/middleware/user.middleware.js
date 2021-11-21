@@ -14,6 +14,7 @@ const { verifyUserName } = require("../server/user.server");
 // 密码加密
 const cryptPassword = async (ctx, next) => {
   const { password } = ctx.request.body;
+  if (!password) return ctx.app.emit("error", regjsterError, ctx);
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
   ctx.request.body.password = hash;
@@ -22,11 +23,10 @@ const cryptPassword = async (ctx, next) => {
 
 // 检验参数是否合法：用户名密码电话那些不能为空
 const verifyParams = async (ctx, next) => {
-  let { name, realname, password, cellphone, departmentId, roleId } =
-    ctx.request.body;
+  let { name, realname, password, cellphone, departmentId } = ctx.request.body;
   // 对name进行删除空格处理，避免前端穿了一堆空格进来
   name = name.trim();
-  if (!(name && realname && password && cellphone && departmentId && roleId))
+  if (!(name && realname && password && cellphone && departmentId))
     return ctx.app.emit("error", regjsterError, ctx);
   await next();
 };

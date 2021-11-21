@@ -68,11 +68,11 @@ class UserController {
     const { password } = ctx.request.body;
     try {
       const res = await updateByid({ id, password });
-      console.log(res);
+      console.log(res, "res");
       if (res[0] == 0) return ctx.app.emit("error", updatePasswordError, ctx);
       ctx.body = { code: 0, message: "修改密码成功", data: null };
     } catch (err) {
-      console.error(err);
+      console.error(err, "error");
       // ctx.app.emit("error");
     }
   }
