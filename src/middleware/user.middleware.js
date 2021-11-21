@@ -1,5 +1,4 @@
 const bcrypt = require("bcryptjs");
-const { emit } = require("nodemon");
 
 // 导入错误类型
 const {
@@ -35,7 +34,7 @@ const verifyParams = async (ctx, next) => {
 // 检验参数是否合理：这里主要指用户名不能出现重复的
 const verifyName = async (ctx, next) => {
   const { name } = ctx.request.body;
-  const res = await verifyUserName(name);
+  const res = await verifyUserName({ name });
   if (res) return ctx.app.emit("error", regjsterNameError, ctx);
   return next();
 };
@@ -51,8 +50,7 @@ const verifyLoginParams = async (ctx, next) => {
 const verifyLogin = async (ctx, next) => {
   const { name, password } = ctx.request.body;
   // 1. 判断用户是否存在
-  const res = await verifyUserName(name);
-  console.log(res);
+  const res = await verifyUserName({ name });
   if (!res) {
     return ctx.app.emit("error", userInexistenceError, ctx);
   }
@@ -60,6 +58,7 @@ const verifyLogin = async (ctx, next) => {
   if (bcrypt.compareSync(password, res.password)) return await next();
   ctx.app.emit("error", userPasswordError, ctx);
 };
+
 module.exports = {
   verifyParams,
   verifyName,
