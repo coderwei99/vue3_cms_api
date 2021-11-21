@@ -19,7 +19,7 @@ const {
   verifyLoginParams,
   verifyLogin,
 } = require("../middleware/user.middleware");
-const { auth } = require("../middleware/auth.middleware");
+const { auth, isRole } = require("../middleware/auth.middleware");
 
 // 用户注册
 router.post("/register", verifyParams, verifyName, cryptPassword, register);
@@ -29,6 +29,9 @@ router.post("/", verifyLoginParams, verifyLogin, login);
 
 // 修改密码
 router.patch("/", auth, cryptPassword, changePassword);
+
+// 修改用户信息
+router.patch("/:id", auth, isRole, changeUserInfo);
 
 // 删除用户
 router.delete("/", auth, deleteUser);

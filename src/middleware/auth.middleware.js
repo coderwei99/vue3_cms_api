@@ -1,8 +1,9 @@
 const JWT = require("jsonwebtoken");
 
 const { JWT_SECRET } = require("../config/config.default");
-
+const { isRoleError } = require("../config/errorType");
 const { TokenExpiredError, JsonWebTokenError } = require("../config/errorType");
+
 const auth = async (ctx, next) => {
   try {
     let { authorization } = ctx.request.header;
@@ -24,6 +25,13 @@ const auth = async (ctx, next) => {
   }
 };
 
+const isRole = async (ctx, next) => {
+  const { roleId } = ctx.state.user;
+  // console.log(roleId);
+  if (!roleId) return ctx.app.emit("error", isRoleError, ctx);
+  await next();
+};
 module.exports = {
   auth,
+  isRole,
 };

@@ -77,6 +77,19 @@ class UserController {
     }
   }
 
+  // 修改用户信息
+  async changeUserInfo(ctx) {
+    const changeParams = ctx.request.body;
+    // const id = ctx
+    // console.log(ctx.request.params);
+    const res = await updateByid({ ...changeParams, ...ctx.request.params });
+    ctx.body = {
+      code: 0,
+      message: "修改用户成功",
+      data: 0,
+    };
+  }
+
   // 删除用户
   async deleteUser(ctx) {
     const { id } = ctx.state.user;

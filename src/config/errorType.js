@@ -44,6 +44,12 @@ module.exports = {
     data: null,
   },
 
+  isRoleError: {
+    code: "10101",
+    message: "没有权限修改用户数据",
+    data: null,
+  },
+
   // 后端错误
   createUserError: {
     code: "20001",
