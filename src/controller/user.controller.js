@@ -9,7 +9,12 @@ const {
   delteUserByid,
 } = require("../server/user.server");
 // 导入错误类型
-const { createUserError } = require("../config/errorType");
+const {
+  createUserError,
+  deleteUserError,
+  updatePasswordError,
+  EnddeleteUserError,
+} = require("../config/errorType");
 // 导入tkoen秘钥
 const { JWT_SECRET } = require("../config/config.default");
 class UserController {
@@ -63,8 +68,9 @@ class UserController {
     const { password } = ctx.request.body;
     try {
       const res = await updateByid({ id, password });
-      if (res)
-        return (ctx.body = { code: 0, message: "修改密码成功", data: null });
+      console.log(res);
+      if (res[0] == 0) return ctx.app.emit("error", updatePasswordError, ctx);
+      ctx.body = { code: 0, message: "修改密码成功", data: null };
     } catch (err) {
       console.error(err);
       // ctx.app.emit("error");
@@ -74,12 +80,19 @@ class UserController {
   // 删除用户
   async deleteUser(ctx) {
     const { id } = ctx.state.user;
-    const res = await delteUserByid({ id });
-    ctx.body = {
-      code: 0,
-      message: "删除用户成功",
-      data: res,
-    };
+    try {
+      console.log(haha);
+      const res = await delteUserByid({ id });
+      if (!res) return ctx.app.emit("error", deleteUserError, ctx);
+      ctx.body = {
+        code: 0,
+        message: "删除用户成功",
+        data: null,
+      };
+    } catch (error) {
+      console.error("error", error);
+      return ctx.app.emit("error", EnddeleteUserError, ctx);
+    }
   }
 }
 

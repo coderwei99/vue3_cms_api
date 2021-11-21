@@ -1,5 +1,6 @@
 module.exports = {
   // 前端错误
+
   //用户注册缺少部分参数
   regjsterError: {
     code: "10001",
@@ -32,11 +33,26 @@ module.exports = {
     message: "无效的token",
     data: null,
   },
+  updatePasswordError: {
+    code: "10007",
+    message: "修改密码失败",
+    data: null,
+  },
+  deleteUserError: {
+    code: "10008",
+    message: "删除用户失败",
+    data: null,
+  },
 
   // 后端错误
   createUserError: {
     code: "20001",
     message: "创建用户错误",
+    data: null,
+  },
+  EnddeleteUserError: {
+    code: "20002",
+    message: "删除用户错误",
     data: null,
   },
 };

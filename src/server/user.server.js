@@ -45,10 +45,8 @@ class UserServer {
     departmentId && Object.assign(info, { departmentId });
     departmentId && Object.assign(info, { departmentId });
     cellphone && Object.assign(info, { cellphone });
-
-    console.log(info);
     const res = User.update(info, { where: { id } });
-    return res[0] === 0 ? false : true;
+    return res;
   }
 
   //根据id删除数据库的用户
@@ -58,8 +56,7 @@ class UserServer {
         id,
       },
     });
-    console.log(res);
-    return res;
+    return res !== 0 ? true : false;
   }
 }
 
