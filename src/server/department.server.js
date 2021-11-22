@@ -2,8 +2,8 @@ const Department = require("../model/department.model");
 
 class DepartmentServer {
   // 创建一个部门
-  async create({ name, leader }) {
-    const res = await Department.create({ name, leader });
+  async create({ name, parentId, leader }) {
+    const res = await Department.create({ name, parentId, leader });
     return res;
   }
 
@@ -25,6 +25,18 @@ class DepartmentServer {
   async deleteDepartment({ id }) {
     const res = await Department.destroy({ where: { id } });
     return res ? true : false;
+  }
+
+  // 修改部门
+  async update({ name, parentId, id, leader }) {
+    console.log({ name, parentId, leader });
+    const res = await Department.update(
+      { name, parentId, leader },
+      {
+        where: { id },
+      }
+    );
+    return res[0] === 0 ? true : false;
   }
 }
 

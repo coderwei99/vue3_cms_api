@@ -5,16 +5,13 @@ const validator = async (ctx, next) => {
     ctx.verifyParams({
       name: {
         type: "string",
-        required: true,
       },
       leader: {
         type: "string",
-        required: true,
       },
-      // name:{
-      //   type:'string',
-      //   required: true
-      // },
+      parentId: {
+        type: "number",
+      },
     });
   } catch (err) {
     console.log(err);

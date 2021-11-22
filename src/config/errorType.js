@@ -68,6 +68,11 @@ module.exports = {
     message: "删除部门失败",
     data: null,
   },
+  patchPartmentError: {
+    code: "10203",
+    message: "修改部门失败",
+    data: null,
+  },
 
   // -----------------------------------------------------------------后端错误-----------------------------------------
   // 用户模块：200xx
@@ -85,6 +90,16 @@ module.exports = {
   EnddeleteDepartmentError: {
     code: "20201",
     message: "删除部门错误",
+    data: null,
+  },
+  EndcreateDepartmentError: {
+    code: "20202",
+    message: "创建部门失败",
+    data: null,
+  },
+  EndPatchPartmentError: {
+    code: "20203",
+    message: "修改部门失败",
     data: null,
   },
 };

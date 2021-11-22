@@ -8,11 +8,11 @@ const Department = seq.define("Departments", {
     unique: true,
     comment: "用户名需要是唯一",
   },
-  // parentId: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false,
-  //   comment: "真实姓名",
-  // },
+  parentId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    comment: "上级部门",
+  },
   leader: {
     type: DataTypes.CHAR(64),
     allowNull: false,
