@@ -38,6 +38,33 @@ class DepartmentServer {
     );
     return res[0] === 0 ? true : false;
   }
+
+  // 查找部门列表
+  async getDepartmentsList({ pageSize, pageNum }) {
+    const offset = (pageNum - 1) * 10;
+    const { count, rows } = await Department.findAndCountAll({
+      limit: pageSize,
+      offset,
+      // attributes: ["id", "name", "parentId"],
+    });
+    return {
+      count,
+      list: rows,
+      pageSize,
+      pageNum,
+    };
+  }
+
+  // 查找某个部门
+  async getOneDement({ id }) {
+    const res = await Department.findOne({
+      where: {
+        id,
+      },
+      // attributes: ["id", "name", "parentId"],
+    });
+    return res;
+  }
 }
 
 module.exports = new DepartmentServer();

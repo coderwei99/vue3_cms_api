@@ -102,4 +102,9 @@ module.exports = {
     message: "修改部门失败",
     data: null,
   },
+  EndGetPartmentListError: {
+    code: "20204",
+    message: "获取部门失败",
+    data: null,
+  },
 };

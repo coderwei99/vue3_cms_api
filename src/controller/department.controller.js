@@ -3,6 +3,8 @@ const {
   create,
   deleteDepartment,
   update,
+  getDepartmentsList,
+  getOneDement,
 } = require("../server/department.server");
 const {
   departmentParamsError,
@@ -11,6 +13,7 @@ const {
   EndcreateDepartmentError,
   patchPartmentError,
   EndPatchPartmentError,
+  EndGetPartmentListError,
 } = require("../config/errorType");
 class DepartmentController {
   // 新建部门
@@ -64,6 +67,38 @@ class DepartmentController {
     } catch (err) {
       console.error(err);
       ctx.app.emit("error", EndPatchPartmentError, ctx);
+    }
+  }
+
+  // 新增部门
+  async getDepartmentList(ctx) {
+    try {
+      const { pageSize = 10, pageNum = 1 } = ctx.request.params;
+      const res = await getDepartmentsList({ pageNum, pageSize });
+      ctx.body = {
+        code: 0,
+        message: "获取部门列表成功",
+        data: res,
+      };
+    } catch (err) {
+      console.error(err);
+      ctx.app.emit("error", EndGetPartmentListError, ctx);
+    }
+  }
+
+  // 查找某个部门
+  async getOneDepartment(ctx) {
+    try {
+      const { id } = ctx.request.params;
+      // console.log(id);
+      const res = await getOneDement({ id });
+      ctx.body = {
+        code: 0,
+        message: "获取部门成功",
+        data: res,
+      };
+    } catch (err) {
+      console.error(err);
     }
   }
 }
