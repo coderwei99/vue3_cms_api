@@ -6,6 +6,7 @@ const {
 const {
   departmentParamsError,
   deletePartmentError,
+  EnddeleteDepartmentError,
 } = require("../config/errorType");
 class DepartmentController {
   async createdepartment(ctx) {
@@ -37,7 +38,8 @@ class DepartmentController {
         data: res,
       };
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      ctx.app.emit("error", EnddeleteDepartmentError, ctx);
     }
   }
 }
