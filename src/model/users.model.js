@@ -6,7 +6,7 @@ const User = seq.define("users", {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
-    comment: "用户名需要是唯一",
+    comment: "用户名,需要是唯一",
   },
   realname: {
     type: DataTypes.STRING,
