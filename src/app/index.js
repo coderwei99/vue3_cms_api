@@ -5,7 +5,7 @@ const parameter = require("koa-parameter");
 
 const userRouter = require("../router/user.route");
 const departmentRouter = require("../router/department.route");
-
+const menusRouter = require("../router/menus.route");
 // 导入自己定义的
 const handleError = require("./handleError");
 
@@ -14,6 +14,7 @@ app.use(koaBody());
 app.use(parameter(app));
 app.use(userRouter.routes()).use(userRouter.allowedMethods());
 app.use(departmentRouter.routes()).use(departmentRouter.allowedMethods());
+app.use(menusRouter.routes()).use(menusRouter.allowedMethods());
 
 app.on("error", handleError);
 module.exports = app;

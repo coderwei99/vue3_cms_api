@@ -1,6 +1,8 @@
 module.exports = {
   // -----------------------------------------------------------------前端错误-----------------------------------------
 
+  // #region
+
   // 用户错误：100xx
   //用户注册缺少部分参数
   regjsterError: {
@@ -74,7 +76,34 @@ module.exports = {
     data: null,
   },
 
+  // #endregion
+
+  // 菜单模块：103xx
+  deleteMenuError: {
+    code: "10301",
+    message: "删除菜单失败",
+    data: null,
+  },
+  updateMenuError: {
+    code: "10302",
+    message: "更新菜单失败",
+    data: null,
+  },
+  getOneMenuError: {
+    code: "10303",
+    message: "没有这个菜单",
+    data: null,
+  },
+  getAllMenuError: {
+    code: "10304",
+    message: "查找菜单失败",
+    data: null,
+  },
+
   // -----------------------------------------------------------------后端错误-----------------------------------------
+
+  // #region
+
   // 用户模块：200xx
   createUserError: {
     code: "20001",
@@ -105,6 +134,35 @@ module.exports = {
   EndGetPartmentListError: {
     code: "20204",
     message: "获取部门失败",
+    data: null,
+  },
+
+  // #endregion
+
+  // 菜单模块203xx
+  endcreateMenuError: {
+    code: "20301",
+    message: "新增菜单失败",
+    data: null,
+  },
+  enddeleteMenuError: {
+    code: "20302",
+    message: "删除菜单失败",
+    data: null,
+  },
+  endUpdateMenuError: {
+    code: "20303",
+    message: "更新菜单失败",
+    data: null,
+  },
+  endfindOneMenuError: {
+    code: "20304",
+    message: "获取菜单失败",
+    data: null,
+  },
+  endfindAllMenuError: {
+    code: "20305",
+    message: "获取菜单失败",
     data: null,
   },
 };
