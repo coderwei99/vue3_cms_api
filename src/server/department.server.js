@@ -20,6 +20,12 @@ class DepartmentServer {
     });
     return res;
   }
+
+  // 删除部门
+  async deleteDepartment({ id }) {
+    const res = await Department.destroy({ where: { id } });
+    return res ? true : false;
+  }
 }
 
 module.exports = new DepartmentServer();

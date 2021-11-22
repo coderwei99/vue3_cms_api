@@ -4,6 +4,7 @@ const { JWT_SECRET } = require("../config/config.default");
 const { isRoleError } = require("../config/errorType");
 const { TokenExpiredError, JsonWebTokenError } = require("../config/errorType");
 
+// 用户是否登录
 const auth = async (ctx, next) => {
   try {
     let { authorization } = ctx.request.header;
@@ -25,6 +26,7 @@ const auth = async (ctx, next) => {
   }
 };
 
+// 用户是否管理员
 const isRole = async (ctx, next) => {
   const { roleId } = ctx.state.user;
   // console.log(roleId);

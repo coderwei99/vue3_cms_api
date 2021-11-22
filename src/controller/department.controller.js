@@ -1,5 +1,12 @@
-const { findDepartment, create } = require("../server/department.server");
-const { departmentParamsError } = require("../config/errorType");
+const {
+  findDepartment,
+  create,
+  deleteDepartment,
+} = require("../server/department.server");
+const {
+  departmentParamsError,
+  deletePartmentError,
+} = require("../config/errorType");
 class DepartmentController {
   async createdepartment(ctx) {
     const { name, leader } = ctx.request.body;
@@ -16,6 +23,21 @@ class DepartmentController {
       };
     } catch (err) {
       console.error(err);
+    }
+  }
+
+  async delteDepartment(ctx) {
+    const { id } = ctx.request.params;
+    try {
+      const res = await deleteDepartment({ id });
+      if (!res) return ctx.app.emit("error", deletePartmentError, ctx);
+      ctx.body = {
+        code: 0,
+        message: "删除部门成功",
+        data: res,
+      };
+    } catch (err) {
+      console.log(err);
     }
   }
 }
