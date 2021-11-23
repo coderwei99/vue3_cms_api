@@ -6,7 +6,7 @@ const Department = seq.define("Departments", {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
-    comment: "用户名需要是唯一",
+    comment: "部门名需要是唯一",
   },
   parentId: {
     type: DataTypes.STRING,
