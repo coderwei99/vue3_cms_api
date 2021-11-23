@@ -100,6 +100,28 @@ module.exports = {
     data: null,
   },
 
+  // 角色模块：104xx
+  createRoleError: {
+    code: "10401",
+    message: "创建角色失败",
+    data: null,
+  },
+  deleteRoleError: {
+    code: "10402",
+    message: "删除角色失败",
+    data: null,
+  },
+  updateRoleError: {
+    code: "10403",
+    message: "更新角色失败",
+    data: null,
+  },
+  getRoleError: {
+    code: "10404",
+    message: "查询角色失败",
+    data: null,
+  },
+
   // -----------------------------------------------------------------后端错误-----------------------------------------
 
   // #region
@@ -163,6 +185,28 @@ module.exports = {
   endfindAllMenuError: {
     code: "20305",
     message: "获取菜单失败",
+    data: null,
+  },
+
+  // 角色模块204xx
+  endCreateRoleError: {
+    code: "20401",
+    message: "创建角色失败",
+    data: null,
+  },
+  endDeleteRoleError: {
+    code: "20402",
+    message: "删除角色失败",
+    data: null,
+  },
+  endUpdateRoleError: {
+    code: "20403",
+    message: "更新角色失败",
+    data: null,
+  },
+  endGetRoleError: {
+    code: "20404",
+    message: "查询角色失败",
     data: null,
   },
 };

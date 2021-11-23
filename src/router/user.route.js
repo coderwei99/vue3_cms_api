@@ -35,7 +35,7 @@ router.patch("/", auth, cryptPassword, changePassword);
 router.patch("/:id", auth, isRole, changeUserInfo);
 
 // 删除用户
-router.delete("/", auth, deleteUser);
+router.delete("/", auth, isRole, deleteUser);
 
 // 获取所有用户
 router.get("/", auth, getUserList);

@@ -115,7 +115,9 @@ class MenusController {
       ctx.body = {
         code: 0,
         message: "获取所有菜单成功",
-        data: result,
+        data: {
+          list: result,
+        },
       };
     } catch (err) {
       console.error(err);
