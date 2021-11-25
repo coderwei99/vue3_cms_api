@@ -8,7 +8,9 @@ const {
   getOneRole,
   getRoleList,
 } = require("../controller/role.controller");
+
 const { roleValidator } = require("../middleware/role.middleware");
+
 const router = new Router({ prefix: "/roles" });
 
 // 新增角色
