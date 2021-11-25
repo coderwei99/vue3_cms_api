@@ -33,7 +33,20 @@ class GoodsServer {
   }
 
   // 查找商品列表
-  async findGoodsList() {}
+  async findGoodsList(params) {
+    const { pageSize = 10, pageNum = 1 } = params;
+    const offset = (pageNum - 1) * 10;
+    const { rows, count } = await Goods.findAndCountAll({
+      offset,
+      limit: pageSize,
+    });
+    return {
+      pageSize,
+      pageNum,
+      count,
+      list: rows,
+    };
+  }
 }
 
 module.exports = new GoodsServer();

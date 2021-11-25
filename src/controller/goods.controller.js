@@ -83,12 +83,16 @@ class GoodsController {
   }
 
   async getGoodsList(ctx) {
-    const res = await findGoodsList();
-    ctx.body = {
-      code: 0,
-      message: "查找商品成功",
-      data: null,
-    };
+    try {
+      const res = await findGoodsList(ctx.request.body);
+      ctx.body = {
+        code: 0,
+        message: "查找商品成功",
+        data: res,
+      };
+    } catch (err) {
+      console.error(err);
+    }
   }
 }
 
