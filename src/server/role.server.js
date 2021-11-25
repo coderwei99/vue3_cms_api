@@ -29,11 +29,13 @@ class RoleServer {
   async updateRole({ id, name, intro, menuList }) {
     const menu = await MenuModel.findAll({ where: { id: menuList } });
     try {
+      console.log(id);
       const role = await RoleModel.findOne({ where: { id } });
       // console.log(role);
       let info = {};
       name && Object.assign(info, { name });
       intro && Object.assign(info, { intro });
+      console.log(info, "info");
       await role.update(info);
       role.setMenuList(menu);
       return role;

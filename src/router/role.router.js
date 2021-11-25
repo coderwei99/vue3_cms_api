@@ -18,7 +18,7 @@ router.post("/", auth, isRole, roleValidator, createRole);
 router.delete("/:id", auth, isRole, deleteRole);
 
 // 更新角色
-router.patch("/:id", auth, isRole, patchRole);
+router.patch("/:id", auth, isRole, roleValidator, patchRole);
 
 // 查询某个角色
 router.get("/:id", auth, isRole, getOneRole);
