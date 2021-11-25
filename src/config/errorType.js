@@ -76,8 +76,6 @@ module.exports = {
     data: null,
   },
 
-  // #endregion
-
   // 菜单模块：103xx
   deleteMenuError: {
     code: "10301",
@@ -121,6 +119,29 @@ module.exports = {
     message: "查询角色失败",
     data: null,
   },
+  // #endregion
+
+  // 商品模块:105xx
+  createGoodsError: {
+    code: "10501",
+    message: "创建商品失败",
+    data: null,
+  },
+  removeGoodsError: {
+    code: "10502",
+    message: "删除商品失败",
+    data: null,
+  },
+  patchGoodsError: {
+    code: "10503",
+    message: "更新商品失败",
+    data: null,
+  },
+  getGoodsError: {
+    code: "10504",
+    message: "查找商品失败",
+    data: null,
+  },
 
   // -----------------------------------------------------------------后端错误-----------------------------------------
 
@@ -158,8 +179,6 @@ module.exports = {
     message: "获取部门失败",
     data: null,
   },
-
-  // #endregion
 
   // 菜单模块203xx
   endcreateMenuError: {
@@ -207,6 +226,29 @@ module.exports = {
   endGetRoleError: {
     code: "20404",
     message: "查询角色失败",
+    data: null,
+  },
+  // #endregion
+
+  // 商品模块:105xx
+  endCreateGoodsError: {
+    code: "20501",
+    message: "创建商品失败",
+    data: null,
+  },
+  endRemoveGoodsError: {
+    code: "20502",
+    message: "删除商品失败",
+    data: null,
+  },
+  endPatchGoodsError: {
+    code: "20503",
+    message: "更新商品失败",
+    data: null,
+  },
+  endGetGoodsError: {
+    code: "20504",
+    message: "查找商品失败",
     data: null,
   },
 };
