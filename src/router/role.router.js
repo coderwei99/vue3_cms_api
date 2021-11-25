@@ -8,10 +8,11 @@ const {
   getOneRole,
   getRoleList,
 } = require("../controller/role.controller");
+const { roleValidator } = require("../middleware/role.middleware");
 const router = new Router({ prefix: "/roles" });
 
 // 新增角色
-router.post("/", auth, isRole, createRole);
+router.post("/", auth, isRole, roleValidator, createRole);
 
 // 删除角色
 router.delete("/:id", auth, isRole, deleteRole);
