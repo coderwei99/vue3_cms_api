@@ -1,4 +1,6 @@
 const User = require("../model/users.model");
+const { Op } = require("sequelize");
+const { handleLike } = require("../utils/handleLike");
 class UserServer {
   // 创建一个新的用户
   async createUser({
@@ -60,14 +62,37 @@ class UserServer {
   }
 
   // 查询用户列表
-  async getUsersList({ pageNum, pageSize }) {
-    // console.log("server", { pageNum, pageSize });
+  async getUsersList(params) {
+    const {
+      pageSize = 10,
+      pageNum = 1,
+      name,
+      id,
+      realname,
+      departmentId,
+      cellphone,
+      roleId,
+      createdAt,
+      updatedAt,
+    } = params;
+    let whereOpt = {};
+    name && Object.assign(whereOpt, { name });
+    realname && Object.assign(whereOpt, { realname });
+    departmentId && Object.assign(whereOpt, { name });
+    cellphone && Object.assign(whereOpt, { cellphone });
+    roleId && Object.assign(whereOpt, { roleId });
+    createdAt && Object.assign(whereOpt, { createdAt });
+    updatedAt && Object.assign(whereOpt, { updatedAt });
+
     const offset = (pageNum - 1) * pageSize;
-    console.log(offset, "offset");
-    console.log(pageSize, "pageSize");
+    whereOpt = handleLike(whereOpt);
+    console.log(whereOpt, "res");
+
     const { rows, count } = await User.findAndCountAll({
+      where: whereOpt,
       offset,
       limit: pageSize * 1,
+      attributes: { exclude: ["password"] },
     });
     console.log(rows);
     return {

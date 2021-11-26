@@ -26,7 +26,7 @@ const { auth, isRole } = require("../middleware/auth.middleware");
 router.post("/register", verifyParams, verifyName, cryptPassword, register);
 
 // 用户登录
-router.post("/", verifyLoginParams, verifyLogin, login);
+router.post("/login", verifyLoginParams, verifyLogin, login);
 
 // 修改密码
 router.patch("/", auth, cryptPassword, changePassword);
@@ -38,5 +38,5 @@ router.patch("/:id", auth, isRole, changeUserInfo);
 router.delete("/", auth, isRole, deleteUser);
 
 // 获取所有用户
-router.get("/", auth, getUserList);
+router.post("/", auth, getUserList);
 module.exports = router;

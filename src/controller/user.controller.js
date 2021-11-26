@@ -17,6 +17,7 @@ const {
   updatePasswordError,
   EnddeleteUserError,
   updateUserInfoError,
+  endGetUserError,
 } = require("../config/errorType");
 
 // 导入tkoen秘钥
@@ -116,16 +117,16 @@ class UserController {
 
   // 获取用户列表
   async getUserList(ctx) {
-    const { pageSize = 10, pageNum = 1 } = ctx.request.query;
     try {
-      const res = await getUsersList({ pageNum, pageSize });
+      const res = await getUsersList(ctx.request.body);
       ctx.body = {
         code: 0,
         message: "获取用户列表成功",
         data: res,
       };
     } catch (err) {
-      console.log("getUserList函数", err);
+      console.error("getUserList函数", err);
+      ctx.app.emit("error", endGetUserError, ctx);
     }
   }
 }

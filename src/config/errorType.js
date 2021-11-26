@@ -180,6 +180,11 @@ module.exports = {
     message: "删除用户错误",
     data: null,
   },
+  endGetUserError: {
+    code: "20003",
+    message: "查询用户错误",
+    data: null,
+  },
   // 部门模块：202xx
   EnddeleteDepartmentError: {
     code: "20201",

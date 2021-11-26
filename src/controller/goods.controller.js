@@ -82,6 +82,7 @@ class GoodsController {
     }
   }
 
+  // 查找商品列表
   async getGoodsList(ctx) {
     try {
       const res = await findGoodsList(ctx.request.body);
@@ -92,8 +93,12 @@ class GoodsController {
       };
     } catch (err) {
       console.error(err);
+      ctx.app.emit("error", endGetRoleError, ctx);
     }
   }
+
+  // 查询每个分类商品的个数
+  async getCategoryCount(ctx) {}
 }
 
 module.exports = new GoodsController();

@@ -7,6 +7,7 @@ const {
   patchGood,
   getOneGood,
   getGoodsList,
+  getCategoryCount,
 } = require("../controller/goods.controller");
 
 const router = new Router({ prefix: "/goods" });
@@ -26,4 +27,6 @@ router.get("/:id", auth, isRole, getOneGood);
 // 查找商品列表
 router.post("/list", auth, isRole, getGoodsList);
 
+// 图表数据：查询每个分类商品的个数
+router.get("category/count", auth, isRole, getCategoryCount);
 module.exports = router;
