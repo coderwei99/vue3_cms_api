@@ -93,6 +93,7 @@ class Category {
       };
     } catch (err) {
       console.error(err);
+      ctx.app.emit("error", endGetOneCategoryError, ctx);
     }
   }
 }
