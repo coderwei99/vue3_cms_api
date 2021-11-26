@@ -1,5 +1,6 @@
 const Department = require("../model/department.model");
 
+const { handleLike } = require("../utils/handleLike");
 class DepartmentServer {
   // 创建一个部门
   async create({ name, parentId, leader }) {
@@ -40,12 +41,22 @@ class DepartmentServer {
   }
 
   // 查找部门列表
-  async getDepartmentsList({ pageSize, pageNum }) {
+  async getDepartmentsList(params) {
+    const { pageSize, pageNum, name, parentId, leader, createdAt, updatedAt } =
+      params;
+    let whereOpt = {};
+    name && Object.assign(whereOpt, { name });
+    parentId && Object.assign(whereOpt, { parentId });
+    leader && Object.assign(whereOpt, { leader });
+    createdAt && Object.assign(whereOpt, { createdAt });
+    updatedAt && Object.assign(whereOpt, { updatedAt });
+    whereOpt = handleLike(whereOpt);
+    console.log(whereOpt);
     const offset = (pageNum - 1) * 10;
     const { count, rows } = await Department.findAndCountAll({
+      where: whereOpt,
       limit: pageSize,
       offset,
-      // attributes: ["id", "name", "parentId"],
     });
     return {
       count,

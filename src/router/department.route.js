@@ -22,9 +22,9 @@ router.delete("/:id", auth, isRole, delteDepartment);
 router.patch("/:id", auth, isRole, patchDepartment);
 
 // 查找所有部门
-router.get("/", auth, getDepartmentList);
+router.post("/list", auth, getDepartmentList);
 
 // 查找某个部门
-router.get("/:id", auth, getOneDepartment);
+router.get("/:id", auth, getOneDepartment); 
 
 module.exports = router;

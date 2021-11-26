@@ -70,11 +70,11 @@ class DepartmentController {
     }
   }
 
-  // 新增部门
+  // 查找部门列表
   async getDepartmentList(ctx) {
     try {
-      const { pageSize = 10, pageNum = 1 } = ctx.request.params;
-      const res = await getDepartmentsList({ pageNum, pageSize });
+      // const { pageSize = 10, pageNum = 1 } = ctx.request.params;
+      const res = await getDepartmentsList(ctx.request.body);
       ctx.body = {
         code: 0,
         message: "获取部门列表成功",
