@@ -76,6 +76,7 @@ class UserServer {
       updatedAt,
     } = params;
     let whereOpt = {};
+    id && Object.assign(whereOpt, { id });
     name && Object.assign(whereOpt, { name });
     realname && Object.assign(whereOpt, { realname });
     departmentId && Object.assign(whereOpt, { name });
