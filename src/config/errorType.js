@@ -143,6 +143,28 @@ module.exports = {
     data: null,
   },
 
+  // 分类模块：106xx
+  createCategoryError: {
+    code: "10601",
+    message: "创建分类失败",
+    data: null,
+  },
+  removeCategoryError: {
+    code: "10602",
+    message: "删除分类失败",
+    data: null,
+  },
+  updateCategoryError: {
+    code: "10603",
+    message: "更新分类失败",
+    data: null,
+  },
+  getOneCategoryError: {
+    code: "10604",
+    message: "更新分类失败",
+    data: null,
+  },
+
   // -----------------------------------------------------------------后端错误-----------------------------------------
 
   // #region
@@ -249,6 +271,28 @@ module.exports = {
   endGetGoodsError: {
     code: "20504",
     message: "查找商品失败",
+    data: null,
+  },
+
+  // 分类模块：206xx
+  endCreateCategoryError: {
+    code: "20601",
+    message: "创建分类失败",
+    data: null,
+  },
+  endRemoveCategoryError: {
+    code: "20602",
+    message: "删除分类失败",
+    data: null,
+  },
+  endUpdateCategoryError: {
+    code: "20603",
+    message: "更新分类失败",
+    data: null,
+  },
+  endGetOneCategoryError: {
+    code: "20604",
+    message: "获取分类失败",
     data: null,
   },
 };
