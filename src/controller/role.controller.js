@@ -91,7 +91,7 @@ class RoleController {
 
   // 查询角色列表
   async getRoleList(ctx) {
-    const res = await getRoleList();
+    const res = await getRoleList(ctx.request.body);
     ctx.body = {
       code: 0,
       message: "查询角色列表成功",
