@@ -1,6 +1,7 @@
 const User = require("../model/users.model");
-const { Op } = require("sequelize");
 const { handleLike } = require("../utils/handleLike");
+const Role = require("../model/role.model");
+
 class UserServer {
   // 创建一个新的用户
   async createUser({
@@ -13,14 +14,16 @@ class UserServer {
   }) {
     try {
       // console.log({ name, realname, password, cellphone, departmentId, roleId });
+      console.log(roleId);
       const res = await User.create({
         name,
         realname,
         password,
         cellphone,
         departmentId,
-        roleId,
       });
+      const _Role = await Role.findOne({ where: { id: roleId } });
+      await res.setRole(_Role);
       // const { id, updateAt, createAt, ...result } = res;
       return res.dataValues;
     } catch (error) {
@@ -61,6 +64,16 @@ class UserServer {
     return res !== 0 ? true : false;
   }
 
+  // 查询单个用户
+  async findOneUserInfo(params) {
+    console.log(params);
+    const res = await User.findOne({
+      where: { id: "4" },
+      attributes: { exclude: ["password"] },
+    });
+    const role = await res.getRole();
+    return { ...res.dataValues, role };
+  }
   // 查询用户列表
   async getUsersList(params) {
     const {

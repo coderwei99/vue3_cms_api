@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 const seq = require("../db/seq");
+const Role = require("./role.model");
 const User = seq.define("users", {
   name: {
     type: DataTypes.STRING,
@@ -29,12 +30,14 @@ const User = seq.define("users", {
     comment: "联系人电话",
   },
   roleId: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: 0,
-    comment: "是否为管理员,0:不是管理员，1:是管理员",
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    comment: "用户角色id",
   },
 });
 
+User.belongsTo(Role, {
+  foreignKey: "roleId",
+});
 // User.sync({ force: true });
 module.exports = User;

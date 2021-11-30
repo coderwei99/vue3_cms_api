@@ -8,6 +8,7 @@ const {
   updateByid,
   delteUserByid,
   getUsersList,
+  findOneUserInfo,
 } = require("../server/user.server");
 
 // 导入错误类型
@@ -18,6 +19,7 @@ const {
   EnddeleteUserError,
   updateUserInfoError,
   endGetUserError,
+  createUsersError,
 } = require("../config/errorType");
 
 // 导入tkoen秘钥
@@ -36,6 +38,10 @@ class UserController {
         departmentId,
         roleId,
       });
+      if (!res.roleId) {
+        createUsersError.data = "roleId不存在";
+        return ctx.app.emit("error", createUsersError, ctx);
+      }
       const { id, updatedAt, password: npassword, createdAt, ...data } = res;
 
       ctx.body = {
@@ -115,6 +121,19 @@ class UserController {
     }
   }
 
+  // 获取单个用户
+  async getOneUserInfo(ctx) {
+    try {
+      const res = await findOneUserInfo(ctx.request.params);
+      ctx.body = {
+        code: 0,
+        message: "获取单个用户成功",
+        data: res,
+      };
+    } catch (err) {
+      console.error(err, "err");
+    }
+  }
   // 获取用户列表
   async getUserList(ctx) {
     try {

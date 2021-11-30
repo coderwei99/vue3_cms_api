@@ -51,6 +51,11 @@ module.exports = {
     message: "不能在这个接口修改用户密码",
     data: null,
   },
+  createUsersError: {
+    code: "10010",
+    message: "创建用户失败",
+    data: null,
+  },
 
   // 权限错误：101xx
   isRoleError: {

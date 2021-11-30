@@ -10,6 +10,7 @@ const {
   deleteUser,
   changeUserInfo,
   getUserList,
+  getOneUserInfo,
 } = require("../controller/user.controller");
 
 // 导入中间件
@@ -36,6 +37,9 @@ router.patch("/:id", auth, isRole, changeUserInfo);
 
 // 删除用户
 router.delete("/", auth, isRole, deleteUser);
+
+// 获取单个用户
+router.get("/:id", auth, getOneUserInfo);
 
 // 获取所有用户
 router.post("/", auth, getUserList);
