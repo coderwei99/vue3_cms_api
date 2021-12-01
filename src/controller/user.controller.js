@@ -132,6 +132,7 @@ class UserController {
       };
     } catch (err) {
       console.error(err, "err");
+      ctx.app.emit("error", endGetUserError, ctx);
     }
   }
   // 获取用户列表
