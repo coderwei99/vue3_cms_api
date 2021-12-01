@@ -70,6 +70,7 @@ class UserController {
       code: 0,
       message: "登录成功",
       data: {
+        ...res,
         token: JWT.sign(res, JWT_SECRET, { expiresIn: "1d" }),
       },
     };
