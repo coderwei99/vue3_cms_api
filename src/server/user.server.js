@@ -1,7 +1,7 @@
 const User = require("../model/users.model");
 const { handleLike } = require("../utils/handleLike");
 const Role = require("../model/role.model");
-
+const Department = require("../model/department.model");
 class UserServer {
   // 创建一个新的用户
   async createUser({
@@ -13,8 +13,13 @@ class UserServer {
     roleId,
   }) {
     try {
-      // console.log({ name, realname, password, cellphone, departmentId, roleId });
-      console.log(roleId);
+      const _Role = await Role.findOne({ where: { id: roleId } });
+      const department = await Department.findOne({
+        where: { id: departmentId },
+      });
+      if (!_Role || !department) {
+        return null;
+      }
       const res = await User.create({
         name,
         realname,
@@ -22,9 +27,7 @@ class UserServer {
         cellphone,
         departmentId,
       });
-      const _Role = await Role.findOne({ where: { id: roleId } });
       await res.setRole(_Role);
-      // const { id, updateAt, createAt, ...result } = res;
       return res.dataValues;
     } catch (error) {
       console.error(error, "roo");
@@ -66,14 +69,18 @@ class UserServer {
 
   // 查询单个用户
   async findOneUserInfo(params) {
-    console.log(params);
     const res = await User.findOne({
-      where: { id: "4" },
+      where: params,
       attributes: { exclude: ["password"] },
     });
+    if (!res) return null;
     const role = await res.getRole();
-    return { ...res.dataValues, role };
+    const department = await Department.findOne({
+      where: { id: res.departmentId },
+    });
+    return { ...res.dataValues, role, department };
   }
+
   // 查询用户列表
   async getUsersList(params) {
     const {

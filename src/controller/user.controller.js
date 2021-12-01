@@ -20,6 +20,7 @@ const {
   updateUserInfoError,
   endGetUserError,
   createUsersError,
+  userInexistenceError,
 } = require("../config/errorType");
 
 // 导入tkoen秘钥
@@ -38,12 +39,13 @@ class UserController {
         departmentId,
         roleId,
       });
-      if (!res.roleId) {
-        createUsersError.data = "roleId不存在";
+      // 判断一下res有没有值
+      if (!res) {
+        createUsersError.result = "roleId或者departmentId不存在";
         return ctx.app.emit("error", createUsersError, ctx);
       }
-      const { id, updatedAt, password: npassword, createdAt, ...data } = res;
 
+      const { id, updatedAt, password: npassword, createdAt, ...data } = res;
       ctx.body = {
         code: 0,
         message: "用户注册成功",
@@ -125,6 +127,7 @@ class UserController {
   async getOneUserInfo(ctx) {
     try {
       const res = await findOneUserInfo(ctx.request.params);
+      if (!res) return ctx.app.emit("error", userInexistenceError, ctx);
       ctx.body = {
         code: 0,
         message: "获取单个用户成功",

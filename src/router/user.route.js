@@ -43,4 +43,5 @@ router.get("/:id", auth, getOneUserInfo);
 
 // 获取所有用户
 router.post("/", auth, getUserList);
+
 module.exports = router;
