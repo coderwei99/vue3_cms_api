@@ -7,6 +7,7 @@ const {
   patchRole,
   getOneRole,
   getRoleList,
+  getRoleMenuList,
 } = require("../controller/role.controller");
 
 const { roleValidator } = require("../middleware/role.middleware");
@@ -27,5 +28,8 @@ router.get("/:id", auth, isRole, getOneRole);
 
 // 查询角色列表
 router.post("/list", auth, isRole, getRoleList);
+
+// 查询用户角色菜单列表
+router.get("/:id/menu", auth, getRoleMenuList);
 
 module.exports = router;

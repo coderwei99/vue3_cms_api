@@ -1,7 +1,7 @@
 // const RoleModel = require("../model/role.model");
 // const MenuModel = require("../model/menus.model");
 const { RoleModel, MenuModel } = require("../model/roleMenus.model");
-
+const handleMenus = require("../utils/handleTree");
 const { handleLike } = require("../utils/handleLike");
 class RoleServer {
   // 创建角色
@@ -83,6 +83,14 @@ class RoleServer {
     } catch (err) {
       console.error(err);
     }
+  }
+
+  // 查询角色菜单列表
+  async getRoleMenu(params) {
+    const role = await RoleModel.findOne(params);
+    let menusList = await role.getMenuList();
+    menusList = handleMenus(menusList);
+    return menusList;
   }
 }
 

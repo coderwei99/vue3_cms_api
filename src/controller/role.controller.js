@@ -4,6 +4,7 @@ const {
   updateRole,
   findOneRole,
   getRoleList,
+  getRoleMenu,
 } = require("../server/role.server");
 
 const {
@@ -97,6 +98,21 @@ class RoleController {
       message: "查询角色列表成功",
       data: res,
     };
+  }
+
+  // 查询角色菜单列表
+  async getRoleMenuList(ctx) {
+    // console.log(ctx.request.params);
+    try {
+      const res = await getRoleMenu(ctx.request.params);
+      ctx.body = {
+        code: 0,
+        message: "查询角色菜单列表成功",
+        data: res,
+      };
+    } catch (err) {
+      console.error(err);
+    }
   }
 }
 
