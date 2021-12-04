@@ -87,7 +87,8 @@ class RoleServer {
 
   // 查询角色菜单列表
   async getRoleMenu(params) {
-    const role = await RoleModel.findOne(params);
+    const role = await RoleModel.findOne({ where: params });
+    console.log(role);
     let menusList = await role.getMenuList();
     menusList = handleMenus(menusList);
     return menusList;

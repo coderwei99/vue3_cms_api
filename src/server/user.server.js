@@ -45,12 +45,11 @@ class UserServer {
   }
 
   // 根据id更新数据库中某个数据
-  async updateByid({ id, name, realname, password, departmentId, cellphone }) {
+  async updateByid({ id, name, realname, roleId, departmentId, cellphone }) {
     let info = {};
     name && Object.assign(info, { name });
     realname && Object.assign(info, { realname });
-    password && Object.assign(info, { password });
-    departmentId && Object.assign(info, { departmentId });
+    roleId && Object.assign(info, { roleId });
     departmentId && Object.assign(info, { departmentId });
     cellphone && Object.assign(info, { cellphone });
     const res = User.update(info, { where: { id } });

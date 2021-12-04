@@ -102,7 +102,7 @@ class UserController {
     ctx.body = {
       code: 0,
       message: "修改用户成功",
-      data: 0,
+      data: res,
     };
   }
 
